@@ -2,7 +2,7 @@
 
 ## Run the Demo
 
-### Planet Service
+### Planet Service (Java)
 
 Build
 
@@ -21,7 +21,7 @@ export OTEL_SERVICE_NAME=planet-service
 java -jar target/planet-service-0.0.1-SNAPSHOT.jar
 ```
 
-### Greeting Service
+### Greeting Service (Python)
 
 Build
 
@@ -43,7 +43,7 @@ source ./venv/bin/activate
 ./venv/bin/python -m flask --app greeting-service run
 ```
 
-### Frontend
+### Frontend (NodeJS)
 
 Run
 
