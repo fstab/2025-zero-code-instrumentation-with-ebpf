@@ -61,3 +61,17 @@ Run
 ```
 curl localhost:8081
 ```
+
+### OTel LGTM Backend
+
+```
+docker run -P 3000:3000 -P 4317:4317 -P 4318:4318 grafana/otel-lgtm:latest
+```
+
+### Beyla
+
+```
+export BEYLA_OPEN_PORT=8080,8081,5000
+export OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4317
+sudo -E ./beyla
+```
