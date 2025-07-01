@@ -1,0 +1,33 @@
+server:
+  http_listen_port: 3200
+  log_level: info
+
+distributor:
+  receivers:
+    otlp:
+      protocols:
+        grpc:
+          endpoint: "0.0.0.0:4317"
+        http:
+          endpoint: "0.0.0.0:4318"
+
+storage:
+  trace:
+    backend: local                     # backend configuration to use
+    wal:
+      path: /var/tempo/wal             # where to store the wal locally
+    local:
+      path: /var/tempo/blocks
+
+metrics_generator:
+  storage:
+    path: /tmp/tempo/generator/wal
+    remote_write:
+      - url: "http://prometheus:9090/api/v1/write"
+        send_exemplars: true
+  traces_storage:
+    path: /tmp/tempo/generator/traces
+
+overrides:
+  metrics_generator_processors: [local-blocks]
+  #metrics_generator_processors: [service-graphs, span-metrics, local-blocks]

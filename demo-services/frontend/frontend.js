@@ -1,8 +1,8 @@
 // Import the HTTP module
 const http = require('http');
 
-const greetingService = "http://localhost:5000/greeting";
-const planetService = "http://localhost:8080/planet";
+const greetingService = process.env.GREETING_SERVICE || "http://localhost:5000/greeting";
+const planetService = process.env.PLANET_SERVICE || "http://localhost:8080/planet";
 
 // Create a server object
 const server = http.createServer((request, response) => {
@@ -60,8 +60,9 @@ const server = http.createServer((request, response) => {
 // Define the port to listen on const PORT = 3000;
 
 const PORT = 8081;
+const IP = "0.0.0.0";
 
 // Start the server and listen on the specified port
-server.listen(PORT, 'localhost', () => {
-  console.log(`Server running at http://localhost:${PORT}/`);
+server.listen(PORT, IP, () => {
+  console.log(`Server running at http://${IP}:${PORT}/`);
 });

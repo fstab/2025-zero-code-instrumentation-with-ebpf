@@ -1,0 +1,16 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["localhost:9090"]
+  - job_name: "beyla"
+    kubernetes_sd_configs:
+      - role: pod
+    relabel_configs:
+      # We only scrape Pods with label app=beyla
+      - source_labels: [__meta_kubernetes_pod_label_app]
+        action: keep
+        regex: beyla
+    honor_labels: true

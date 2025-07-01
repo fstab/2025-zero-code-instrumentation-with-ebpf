@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: load-generator
+  labels:
+    app: load-generator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: load-generator
+  template:
+    metadata:
+      labels:
+        app: load-generator
+    spec:
+      containers:
+        - name: load-generator
+          image: grafana/k6
+          imagePullPolicy: IfNotPresent
+          command: ["/bin/sh", "-c", "while true ; do k6 run /scripts/load-generator.js ; sleep 5 ; done"]
+          volumeMounts:
+          - mountPath: /scripts
+            name: load-generator
+      volumes:
+        - name: load-generator
+          configMap:
+            name: load-generator

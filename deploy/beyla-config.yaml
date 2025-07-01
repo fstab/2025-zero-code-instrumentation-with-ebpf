@@ -1,0 +1,16 @@
+discovery:
+  services:
+    - k8s_deployment_name: greeting-serivce
+    - k8s_deployment_name: planet-serivce
+    - k8s_deployment_name: frontend
+attributes:
+  kubernetes:
+    enable: true
+prometheus_export:
+  port: 9999
+  features:
+    - application
+    - application_process
+    - network
+otel_traces_export:
+  endpoint: http://tempo:4318
