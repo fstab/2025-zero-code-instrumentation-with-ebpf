@@ -1,7 +1,7 @@
 discovery:
   services:
-    - k8s_deployment_name: greeting-serivce
-    - k8s_deployment_name: planet-serivce
+    - k8s_deployment_name: greeting-service
+    - k8s_deployment_name: planet-service
     - k8s_deployment_name: frontend
 attributes:
   kubernetes:
@@ -10,7 +10,11 @@ prometheus_export:
   port: 9999
   features:
     - application
+    - application_span
+    - application_service_graph
     - application_process
     - network
+    - application_host
+    - network_inter_zone
 otel_traces_export:
   endpoint: http://tempo:4318

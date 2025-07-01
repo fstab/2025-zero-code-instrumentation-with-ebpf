@@ -8,6 +8,11 @@ kind load docker-image beyla-demo/greeting-service
 kind load docker-image beyla-demo/frontend
 kind load docker-image fstab/beyla
 
+kind load docker-image prom/prometheus
+kind load docker-image grafana/tempo
+kind load docker-image grafana/k6
+kind load docker-image grafana/grafana
+
 kubectl create configmap beyla-config --from-file=./deploy/beyla-config.yaml
 kubectl create configmap prometheus-config --from-file=./deploy/prometheus-config.yaml
 kubectl create configmap load-generator --from-file=./deploy/load-generator.js

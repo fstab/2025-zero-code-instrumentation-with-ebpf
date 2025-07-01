@@ -10,3 +10,8 @@ datasources:
     type: tempo
     uid: tempo
     url: http://tempo:3200
+    jsonData:
+      nodeGraph:
+        enabled: true
+      serviceMap:
+        datasourceUid: prometheus

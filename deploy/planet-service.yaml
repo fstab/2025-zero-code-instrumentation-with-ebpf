@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: planet-serivce
+  name: planet-service
   labels:
     app: planet-service
 spec:
