@@ -45,6 +45,13 @@ spec:
     spec:
       hostPID: true
       hostNetwork: true
+      dnsPolicy: "None"  # Don't use the host's DNS policy.
+      dnsConfig:
+        nameservers:
+        - 10.96.0.10 # found with 'kubectl get svc -n kube-system'
+        searches:
+        - svc.cluster.local
+        - default.svc.cluster.local
       serviceAccountName: beyla
       containers:
         - name: beyla
