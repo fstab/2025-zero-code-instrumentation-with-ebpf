@@ -1,5 +1,12 @@
 # Zero Code Instrumentation with eBPF
 
+## Prerequisites
+
+- Java
+- Maven
+
+## Setup
+
 The following script will create a kind cluster and deploy the demo there.
 
 ```
