@@ -19,7 +19,7 @@ Now, run the following command to expose port 3000 of the Grafana Pod on localho
 kubectl port-forward $(kubectl get pods -lapp=grafana -o=name) 3000:3000
 ```
 
-Access Grafana on http://localhost:3000. Default username is _admin_ with password _admin_.
+Access Grafana on http://localhost:3000, Auth and login is disabled because this is demo deployment, and default user role is Admin.
 
 Click on Dashboards (menu on the left) -> RED metrics (list of dashboards) to view an example RED metrics dashboard.
 
