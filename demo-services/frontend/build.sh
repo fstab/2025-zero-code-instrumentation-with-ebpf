@@ -2,4 +2,8 @@
 
 set -e
 
-docker build -t beyla-demo/frontend .
+if command -v podman &>/dev/null; then
+    podman build -t beyla-demo/frontend .
+else
+    docker build -t beyla-demo/frontend .
+fi

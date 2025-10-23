@@ -15,7 +15,13 @@ for service in frontend greeting-service planet-service ; do
     cd ./demo-services/$service
     ./build.sh
     cd ../..
-    kind load docker-image beyla-demo/$service
+    if command -v podman &>/dev/null; then
+        rm -f images/beyla_demo_$service.tar 2>/dev/null
+        podman save beyla-demo/$service -o images/beyla_demo_$service.tar
+        kind load image-archive images/beyla_demo_$service.tar
+    else
+        kind load docker-image beyla-demo/$service
+    fi
 done
 
 echo
@@ -24,10 +30,19 @@ echo "# Loading upstream Docker images"
 echo "############################################################"
 for docker_image in prom/prometheus grafana/tempo grafana/k6 grafana/grafana grafana/beyla ; do
     echo "Loading $docker_image"
-    if ! docker image inspect $docker_image >/dev/null 2>&1 ; then
-        docker pull $docker_image
+    if command -v podman &>/dev/null; then
+        if ! podman image inspect $docker_image >/dev/null 2>&1 ; then
+            podman pull $docker_image
+        fi
+        rm -f images/${docker_image//\//_}.tar 2>/dev/null
+        podman save $docker_image -o images/${docker_image//\//_}.tar
+        kind load image-archive images/${docker_image//\//_}.tar
+    else
+        if ! docker image inspect $docker_image >/dev/null 2>&1 ; then
+            docker pull $docker_image
+        fi
+        kind load docker-image $docker_image
     fi
-    kind load docker-image $docker_image
 done
 
 echo

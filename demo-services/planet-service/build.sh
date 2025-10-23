@@ -3,5 +3,8 @@
 set -e
 
 mvn wrapper:wrapper
-./mvnw clean package
-docker build -t beyla-demo/planet-service .
+if command -v podman &>/dev/null; then
+    podman build -t beyla-demo/planet-service .
+else
+    docker build -t beyla-demo/planet-service .
+fi
